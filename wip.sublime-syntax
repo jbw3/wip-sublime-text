@@ -1,0 +1,62 @@
+%YAML 1.2
+---
+name: WIP
+file_extensions: [wip]
+scope: source.wip
+
+contexts:
+  main:
+    - include: block_comments
+    - include: line_comments
+    - include: constants_bool
+    - include: constants_int
+    - include: keywords
+    - include: strings
+    - include: assignment_operators
+    - include: operators
+    - include: types
+
+  line_comments:
+    - match: "#.*"
+      scope: comment.line.wip
+
+  block_comments:
+    - match: "#!"
+      push:
+        - meta_scope: comment.block.wip
+        - match: "!#"
+          pop: true
+        - include: block_comments
+
+  constants_bool:
+    - match: \b(false|true)\b
+      scope: constant.language.wip
+
+  constants_int:
+    - match: \b(0b[01_]+|0o[0-7_]+|[0-9][0-9_]*|0h[0-9A-Fa-f_]+)\b
+      scope: constant.language.wip
+
+  keywords:
+    - match: \b(break|continue|elif|else|extern|for|fun|if|in|var|while)\b
+      scope: keyword.control.wip
+
+  strings:
+    - match: \"
+      push:
+        - meta_scope: string.quoted.double.wip
+        - match: \"|\n
+          pop: true
+        - match: \\([\\'"nrt]|x[0-9A-Fa-f]{2}|u\{[0-9A-Fa-f]{1,8}\})
+          scope: constant.character.escape.wip
+
+  assignment_operators:
+    - match: <<=|>>>=|>>=|\+=|-=|\*=|/=|%=|&=|\|=|\^=|=
+      scope: keyword.operator.assignment.wip
+
+  operators:
+    - match: <<|>>>|>>|==|!=|<=|>=|&&|\|\||\+|-|\*|/|%|&|\||\^|!|<|>|\.\.<|\.\.
+      scope: keyword.operator.wip
+
+  types:
+    - match: \b(bool|i8|i16|i32|i64|isize|str|u8|u16|u32|u64|usize)\b
+      scope: storage.type.wip
