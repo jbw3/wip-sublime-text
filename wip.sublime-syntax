@@ -9,6 +9,7 @@ contexts:
     - include: block_comments
     - include: line_comments
     - include: function_declaration
+    - include: struct_definition
     - include: constants_bool
     - include: constants_int
     - include: keywords
@@ -86,3 +87,15 @@ contexts:
             - include: types
             - match: "&"
               scope: keyword.operator.wip
+
+  struct_definition:
+    - match: \bstruct\b
+      scope: storage.type.struct.wip
+      push:
+        - meta_scope: meta.head.struct.wip
+        - match: "{"
+          pop: true
+        - include: block_comments
+        - include: line_comments
+        - match: "[_a-zA-Z][_a-zA-Z0-9]*"
+          scope: entity.name.type.struct.wip
