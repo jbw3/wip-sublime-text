@@ -8,6 +8,7 @@ contexts:
   main:
     - include: block_comments
     - include: line_comments
+    - include: function_declaration
     - include: constants_bool
     - include: constants_int
     - include: keywords
@@ -60,3 +61,28 @@ contexts:
   types:
     - match: \b(bool|i8|i16|i32|i64|isize|str|u8|u16|u32|u64|usize)\b
       scope: storage.type.wip
+
+  function_declaration:
+    - match: \bfun\b
+      scope: keyword.control.wip
+      push:
+        - meta_scope: meta.function.definition.wip
+        - match: "{|;"
+          pop: true
+        - include: block_comments
+        - include: line_comments
+        - include: types
+        - match: "&"
+          scope: keyword.operator.wip
+        - match: \b([_a-zA-Z][_a-zA-Z0-9]*) *\(
+          captures:
+            1: entity.name.function.wip
+          push:
+            - meta_scope: meta.function.definition.parameters.wip
+            - match: \)
+              pop: true
+            - include: block_comments
+            - include: line_comments
+            - include: types
+            - match: "&"
+              scope: keyword.operator.wip
