@@ -39,7 +39,7 @@ contexts:
       scope: constant.language.wip
 
   keywords:
-    - match: \b(break|continue|elif|else|extern|for|fun|if|in|var|while)\b
+    - match: \b(break|continue|elif|else|extern|for|fun|if|in|return|var|while)\b
       scope: keyword.control.wip
 
   strings:
