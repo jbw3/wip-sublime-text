@@ -10,7 +10,7 @@ contexts:
     - include: line_comments
     - include: struct_definition
     - include: constants_bool
-    - include: constants_int
+    - include: constants_numeric
     - include: keywords
     - include: strings
     - include: assignment_operators
@@ -33,8 +33,8 @@ contexts:
     - match: \b(false|true)\b
       scope: constant.language.wip
 
-  constants_int:
-    - match: \b(0b[01_]+|0o[0-7_]+|[0-9][0-9_]*|0x[0-9A-Fa-f_]+)\b
+  constants_numeric:
+    - match: \b(0b[01_]+|0o[0-7_]+|[0-9][0-9_]*(\.[0-9_]+)*(e-?[0-9_]+)*|0x[0-9A-Fa-f_]+)\b
       scope: constant.language.wip
 
   keywords:
@@ -59,7 +59,7 @@ contexts:
       scope: keyword.operator.wip
 
   types:
-    - match: \b(bool|i8|i16|i32|i64|isize|str|type|u8|u16|u32|u64|usize)\b
+    - match: \b(bool|f32|f64|i8|i16|i32|i64|isize|str|type|u8|u16|u32|u64|usize)\b
       scope: storage.type.wip
 
   struct_definition:
