@@ -8,7 +8,6 @@ contexts:
   main:
     - include: block_comments
     - include: line_comments
-    - include: struct_definition
     - include: constants_bool
     - include: constants_numeric
     - include: keywords
@@ -38,7 +37,7 @@ contexts:
       scope: constant.numeric.wip
 
   keywords:
-    - match: \b(break|cast|const|continue|elif|else|extern|for|fun|if|in|return|var|while)\b
+    - match: \b(break|cast|const|continue|elif|else|extern|for|fun|if|in|return|struct|var|while)\b
       scope: keyword.control.wip
 
   strings:
@@ -61,15 +60,3 @@ contexts:
   types:
     - match: \b(bool|f32|f64|i8|i16|i32|i64|isize|str|type|u8|u16|u32|u64|usize)\b
       scope: storage.type.wip
-
-  struct_definition:
-    - match: \bstruct\b
-      scope: storage.type.struct.wip
-      push:
-        - meta_scope: meta.head.struct.wip
-        - match: "{"
-          pop: true
-        - include: block_comments
-        - include: line_comments
-        - match: "[_a-zA-Z][_a-zA-Z0-9]*"
-          scope: entity.name.type.struct.wip
