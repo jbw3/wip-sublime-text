@@ -7,6 +7,7 @@ scope: source.wip
 contexts:
   main:
     - include: block_comments
+    - include: built_ins
     - include: line_comments
     - include: constants_bool
     - include: constants_numeric
@@ -28,6 +29,10 @@ contexts:
           pop: true
         - include: block_comments
 
+  built_ins:
+    - match: "@(cast|e|pi)\\b"
+      scope: constant.language.wip
+
   constants_bool:
     - match: \b(false|true)\b
       scope: constant.language.wip
@@ -37,7 +42,7 @@ contexts:
       scope: constant.numeric.wip
 
   keywords:
-    - match: \b(break|cast|const|continue|elif|else|extern|for|fun|if|in|return|struct|var|while)\b
+    - match: \b(break|const|continue|elif|else|extern|for|fun|if|in|return|struct|var|while)\b
       scope: keyword.control.wip
 
   strings:
