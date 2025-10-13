@@ -30,7 +30,7 @@ contexts:
         - include: block_comments
 
   built_ins:
-    - match: "@(bitCast|cast|e|pi)\\b"
+    - match: "@(bitCast|cast|e|intToPtr|pi|ptrToInt)\\b"
       scope: constant.language.wip
 
   constants_bool:
@@ -42,7 +42,7 @@ contexts:
       scope: constant.numeric.wip
 
   keywords:
-    - match: \b(break|const|continue|elif|else|extern|for|fun|if|in|return|struct|var|while)\b
+    - match: \b(break|const|continue|elif|else|extern|for|fun|if|in|return|struct|unchecked|var|while)\b
       scope: keyword.control.wip
 
   strings:
