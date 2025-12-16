@@ -30,7 +30,7 @@ contexts:
         - include: block_comments
 
   built_ins:
-    - match: "@(bitCast|cast|e|intToPtr|pi|ptrToInt)\\b"
+    - match: "@(assert|bitCast|cast|e|intToPtr|pi|ptrToInt)\\b"
       scope: constant.language.wip
 
   constants_bool:
